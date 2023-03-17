@@ -12,29 +12,27 @@ public class Main {
 
         UserService userService = new UserServiceImpl();
         userService.createTable();
-        userService.saveUser("Max", 20, "CEO", true);
-        userService.saveUser("Artur", 25, "Manager", false);
-        userService.saveUser("Anna", 30, "Programming", false);
-        userService.saveUser("Oleg", 50, "Spielbracher", false);
-
+        userService.addUser("Max", 20, "CEO", true);
+        userService.addUser("Artur", 25, "Manager", false);
+        userService.addUser("Anna", 30, "Programming", false);
+        userService.addUser("Oleg", 50, "Spielbracher", false);
+        System.out.println();
         userService.removeUserById(2);
-        System.out.println(userService.getUserById(1));
+        userService.removeUserById(33);
+        System.out.println();
         userService.getAllUser().forEach(System.out::println);
-        userService.getUserById(2);
+        System.out.println();
+        // System.out.println(userService.getUserById(1));
+        System.out.println(userService.getUserById(45));
+        userService.getAllUser().forEach(System.out::println);
+        userService.cleanUserTable();
+        userService.getAllUser().forEach(System.out::println);
         userService.dropTable();
-
-
-        try {
-            userService.cleanUserTable();
+               try {
             userService.getAllUser().forEach(System.out::println);
-        } catch (Exception e) {
-            System.out.println("Причина ошибки _ " + e.getCause());
-
-            e.printStackTrace();
-
-
+        } catch (NullPointerException e) {
+            System.out.println(e.getLocalizedMessage());
         }
-
 
     }
 }

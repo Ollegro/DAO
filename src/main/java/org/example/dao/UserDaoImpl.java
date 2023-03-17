@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDAO {
-    List<User> userList;
-    int id;
+    private List<User> userList;
+    private int id;
 
     @Override
     public void createTable() {
@@ -20,7 +20,7 @@ public class UserDaoImpl implements UserDAO {
     }
 
     @Override
-    public void saveUser(String name, int age, String position, boolean isTopManager) {
+    public void addUser(String name, int age, String position, boolean isTopManager) {
         userList.add(new User(++id, name, age, position, isTopManager));
         System.out.println("User id:" + id + " с именем " + name + " добавлен в БД");
     }
@@ -39,19 +39,26 @@ public class UserDaoImpl implements UserDAO {
 
     @Override
     public User getUserById(int id) {
-
-        return userList.get(id);
-
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getId() == id)
+                return userList.get(i);
+        }
+        System.out.print("Индекса " + id + " нет !  ");
+        return null;
     }
 
     @Override
     public List<User> getAllUser() {
-        if (userList != null) {
+        if (userList == null) {
+            System.out.println("БД отсутствует!");
+            return null;
+        } else if (userList.isEmpty()) {
+            System.out.println("БД есть, но пуста !");
             return userList;
         } else {
-            System.out.println("Список userList пустой!");
+            System.out.println();
+            return userList;
         }
-        return null;
     }
 
     @Override

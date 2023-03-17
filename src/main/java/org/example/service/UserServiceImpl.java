@@ -19,9 +19,8 @@ public class UserServiceImpl implements UserService {
         userDAO.dropTable();
     }
 
-    @Override
-    public void saveUser(String name, int age, String position, boolean isTopManager) {
-        userDAO.saveUser(name, age, position, isTopManager);
+    public void addUser(String name, int age, String position, boolean isTopManager) {
+        userDAO.addUser(name, age, position, isTopManager);
     }
 
     @Override
@@ -31,12 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(int id) {
-        try {
-            return userDAO.getUserById(id - 1);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.print(" id не может быть меньше 1. Возврат   _");
-        }
-        return null;
+        return userDAO.getUserById(id);
     }
 
     @Override

@@ -9,7 +9,7 @@ public interface UserService {
 
     void dropTable();
 
-    void saveUser(String name, int age, String position, boolean isTopManager);
+    void addUser(String name, int age, String position, boolean isTopManager);
 
     void removeUserById(int id);
 
@@ -17,5 +17,5 @@ public interface UserService {
 
     List<User> getAllUser();
 
-    void cleanUserTable();
+    void cleanUserTable() ;
 }
